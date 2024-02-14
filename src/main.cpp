@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
         std::cout<<"You are running this program on windows."<<std::endl;
     #else
         std::cout<<"You are running this program on linux."<<std::endl;
-    #endif // DEBUG
+    #endif 
 
 
 }
