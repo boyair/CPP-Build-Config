@@ -5,7 +5,7 @@ import time
 
 
 def __main__():
-    # declare window and widgets and colors
+    # declare window, widgets and colors
     global window
     global title
     global debug_build_btn
@@ -36,8 +36,8 @@ def __main__():
     release_build_btn.config(bg=buttonbg, font=('David', 20), width=20, height=1)
     # modify os_dropdown menu
     current_os.set(sys.platform)
-    os_dropdown.config(font=('David', 20), bg='black', fg='white')
     os_menu.config(font=('David', 20), bg='black', fg='white')
+    os_dropdown.config(font=('David', 20), bg='black', fg='white')
     os_dropdown.place(x=950, y=0)
     window.mainloop()
 
