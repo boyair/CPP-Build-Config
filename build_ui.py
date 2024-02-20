@@ -57,8 +57,8 @@ def __main__():
 def build_debug():
     debug_build_btn.config(text='building')
     window.update()
-    print(current_os.get())
-    os.system("rm -rf obj/Debug")
+    command = "rm -rf obj/Debug" if current_os.get() == "linux" else "rmdir -rf obj/Debug"
+    os.system(command)
     os.system("premake5 --os=" + current_os.get() + " gmake")
     os.system("make config=debug")
     debug_build_btn.config(text="build debug🔨")
@@ -68,8 +68,8 @@ def build_debug():
 def build_release():
     release_build_btn.config(text='building')
     window.update()
-    print(current_os.get())
-    os.system("rm -rf obj/Release")
+    command = "rm -rf obj/Release" if current_os.get() == "linux" else "rmdir -rf obj/Release"
+    os.system(command)
     os.system("rm Makefile")
     os.system("premake5 --os=" + current_os.get() + "  gmake")
     os.system("make config=release")
