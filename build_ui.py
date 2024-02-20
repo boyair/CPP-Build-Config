@@ -46,17 +46,19 @@ def __main__():
     release_run_btn.config(bg=buttonbg, font=('David', 20), width=4, height=1)
     release_run_btn.place(x=255, y=300)
     # modify os_dropdown menu
-    os_text.config(font=('David', 30,'bold'), bg=windowbg, fg='black')
+    os_text.config(font=('David', 30, 'bold'), bg=windowbg, fg='black')
     os_menu.config(font=('David', 20), bg='black', fg='white')
     os_dropdown.config(font=('David', 20), bg='black', fg='white')
     os_dropdown.place(x=70, y=405)
-    os_text.place(x=0,y=400)
+    os_text.place(x=0, y=400)
     window.mainloop()
 
 
 def build_debug():
     debug_build_btn.config(text='building')
     window.update()
+    print(current_os.get())
+    os.system("rm -rf obj/Debug")
     os.system("premake5 --os=" + current_os.get() + " gmake")
     os.system("make config=debug")
     debug_build_btn.config(text="build debug🔨")
@@ -66,6 +68,9 @@ def build_debug():
 def build_release():
     release_build_btn.config(text='building')
     window.update()
+    print(current_os.get())
+    os.system("rm -rf obj/Release")
+    os.system("rm Makefile")
     os.system("premake5 --os=" + current_os.get() + "  gmake")
     os.system("make config=release")
     release_build_btn.config(text="build release📤")
@@ -73,13 +78,22 @@ def build_release():
 
 
 def run_debug():
-    command="bin/Debug/Application" if current_os.get() == "linux" else "bin/Debug/Application.exe"
+    release_run_btn.config(text='...')
+    window.update()
+    command = "bin/Debug/Application" if current_os.get() == "linux" else "bin/Debug/Application.exe"
+    print(command)
     os.system(command)
+    release_run_btn.config(text='RUN')
+    window.update()
 
 
 def run_release():
-    command="bin/Release/Application" if current_os.get() == "linux" else "bin/Release/Application.exe"
+    release_run_btn.config(text='...')
+    window.update()
+    command = "bin/Release/Application" if current_os.get() == "linux" else "bin/Release/Application.exe"
     os.system(command)
+    release_run_btn.config(text='RUN')
+    window.update()
 
 
 __main__()
