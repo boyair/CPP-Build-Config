@@ -37,23 +37,24 @@ def __main__():
     window.geometry("350x520")
     window.title('C++ project builder')
     window.resizable(False, False)
-    # modify labels
+    # place labels
     title.place(x=30, y=10)
     cl_args_label.place(x=0, y=350)
-    # modify buttons
+    # place buttons
     debug_build_btn.place(x=10, y=200)
     release_build_btn.place(x=10, y=300)
     debug_run_btn.place(x=255, y=200)
     release_run_btn.place(x=255, y=300)
-    # modify cl_args_input
+    # place cl_args_input
     cl_args_input.place(x=10, y=400)
     window.mainloop()
 
 
+    # build executable functions
 def build_debug():
     debug_build_btn.config(text='building')
     window.update()
-    os.system("premake5 --os=" + sys.platform + " gmake")
+    os.system("premake5 gmake")
     os.system("make config=debug")
     debug_build_btn.config(text="build debug🔨")
     window.update()
@@ -62,17 +63,18 @@ def build_debug():
 def build_release():
     release_build_btn.config(text='building')
     window.update()
-    os.system("premake5 --os=" + sys.platform + "  gmake")
+    os.system("premake5 gmake")
     os.system("make config=release")
     release_build_btn.config(text="build release📤")
     window.update()
 
 
+    # run executable functions
 def run_debug():
     release_run_btn.config(text='...')
     window.update()
     exec_file = "Application" if sys.platform == "linux" else "Application.exe"
-    os.system("bin/Debug/" + exec_file + " " + cl_args_input.get())
+    os.system("bin/Debug/" + exec_file + " " + cl_args_input.get("1.0","end-1c"))
     release_run_btn.config(text='RUN')
     window.update()
 
@@ -81,7 +83,7 @@ def run_release():
     release_run_btn.config(text='...')
     window.update()
     exec_file = "Application" if sys.platform == "linux" else "Application.exe"
-    os.system("bin/Release/" + exec_file + " " + cl_args_input.get())
+    os.system("bin/Release/" + exec_file + " " + cl_args_input.get("1.0","end-1c"))
     release_run_btn.config(text='RUN')
     window.update()
 
