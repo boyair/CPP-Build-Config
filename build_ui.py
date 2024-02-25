@@ -5,16 +5,14 @@ import subprocess
 
 
 def __main__():
-    # declare window, widgets and colors
+    # declare window, widgets and colors (necessary to make them global)
     global window
     global title
     global debug_build_btn
     global release_build_btn
     global debug_run_btn
     global release_run_btn
-    global current_os
-    global os_dropdown
-    global os_text
+    global cl_args_label
     windowbg = "#444444"  # dark grey
     buttonbg = "#bbbbbb"  # light grey
     # define window and widgets
@@ -24,19 +22,19 @@ def __main__():
     release_build_btn = tk.Button(window, text="build release📤", command=build_release)
     debug_run_btn = tk.Button(window, text="RUN", command=run_debug)
     release_run_btn = tk.Button(window, text="RUN", command=run_release)
-    current_os = tk.StringVar(window)
-    os_dropdown = tk.OptionMenu(window, current_os, 'linux', 'windows')
-    os_menu = window.nametowidget(os_dropdown.menuname)
-    os_text = tk.Label(window, text="OS:")
-    current_os.set(sys.platform)
+    cl_args_label = tk.Label(window, text="command line args:")
+    cl_args_input = tk.Text(window, height=2, width=20)
     # modify main window
     window.geometry("350x520")
     window.config(bg=windowbg, width=8, height=3)
     window.title('C++ project builder')
     window.resizable(False, False)
-    # modify title label
+    # modify labels
     title.config(font=('David', 35, 'bold'), bg=windowbg, fg='red')
     title.place(x=30, y=10)
+    cl_args_label.config(font=('David', 20, 'bold'), bg=windowbg, fg='black')
+    cl_args_label.place(x=0, y=350)
+    # modify buttons
     debug_build_btn.config(bg=buttonbg, font=('David', 20), width=14, height=1)
     debug_build_btn.place(x=10, y=200)
     release_build_btn.config(bg=buttonbg, font=('David', 20), width=14, height=1)
@@ -45,21 +43,16 @@ def __main__():
     debug_run_btn.place(x=255, y=200)
     release_run_btn.config(bg=buttonbg, font=('David', 20), width=4, height=1)
     release_run_btn.place(x=255, y=300)
-    # modify os_dropdown menu
-    os_text.config(font=('David', 30, 'bold'), bg=windowbg, fg='black')
-    os_menu.config(font=('David', 20), bg='black', fg='white')
-    os_dropdown.config(font=('David', 20), bg='black', fg='white')
-    os_dropdown.place(x=70, y=405)
-    os_text.place(x=0, y=400)
+    # modify cl_args_input
+    cl_args_input.config(bg='black', fg='white', font=('David', 20))
+    cl_args_input.place(x=10, y=400)
     window.mainloop()
 
 
 def build_debug():
     debug_build_btn.config(text='building')
     window.update()
-    command = "rm -rf obj/Debug" if current_os.get() == "linux" else "rmdir -rf obj/Debug"
-    os.system(command)
-    os.system("premake5 --os=" + current_os.get() + " gmake")
+    os.system("premake5 --os=" + sys.platform + " gmake")
     os.system("make config=debug")
     debug_build_btn.config(text="build debug🔨")
     window.update()
@@ -68,10 +61,7 @@ def build_debug():
 def build_release():
     release_build_btn.config(text='building')
     window.update()
-    command = "rm -rf obj/Release" if current_os.get() == "linux" else "rmdir -rf obj/Release"
-    os.system(command)
-    os.system("rm Makefile")
-    os.system("premake5 --os=" + current_os.get() + "  gmake")
+    os.system("premake5 --os=" + sys.platform + "  gmake")
     os.system("make config=release")
     release_build_btn.config(text="build release📤")
     window.update()
@@ -80,9 +70,8 @@ def build_release():
 def run_debug():
     release_run_btn.config(text='...')
     window.update()
-    command = "bin/Debug/Application" if current_os.get() == "linux" else "bin/Debug/Application.exe"
-    print(command)
-    os.system(command)
+    exec_file = "Application" if sys.platform == "linux" else "Application.exe"
+    os.system("bin/Debug/" + exec_file)
     release_run_btn.config(text='RUN')
     window.update()
 
@@ -90,8 +79,8 @@ def run_debug():
 def run_release():
     release_run_btn.config(text='...')
     window.update()
-    command = "bin/Release/Application" if current_os.get() == "linux" else "bin/Release/Application.exe"
-    os.system(command)
+    exec_file = "Application" if sys.platform == "linux" else "Application.exe"
+    os.system("bin/Release/" + exec_file)
     release_run_btn.config(text='RUN')
     window.update()
 
