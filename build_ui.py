@@ -18,34 +18,34 @@ def __main__():
     buttonbg = "#bbbbbb"  # light grey
     # define window and widgets
     window = tk.Tk()
-    title = tk.Label(window, text="C++ project\n builder")
-    debug_build_btn = tk.Button(window, text="build debug🔨", command=build_debug)
-    release_build_btn = tk.Button(window, text="build release📤", command=build_release)
-    debug_run_btn = tk.Button(window, text="RUN", command=run_debug)
-    release_run_btn = tk.Button(window, text="RUN", command=run_release)
-    cl_args_label = tk.Label(window, text="command line args:")
-    cl_args_input = tk.Text(window, height=2, width=20)
+    title = tk.Label(window, text="C++ project\n builder",
+                     font=('David', 35, 'bold'), bg=windowbg, fg='red')
+    debug_build_btn = tk.Button(window, text="build debug🔨", command=build_debug,
+                                bg=buttonbg, font=('David', 20), width=14, height=1)
+    release_build_btn = tk.Button(window, text="build release📤", command=build_release,
+                                  bg=buttonbg, font=('David', 20), width=14, height=1)
+    debug_run_btn = tk.Button(window, text="RUN", command=run_debug,
+                              bg=buttonbg, font=('David', 20), width=4, height=1)
+    release_run_btn = tk.Button(window, text="RUN", command=run_release,
+                                bg=buttonbg, font=('David', 20), width=4, height=1)
+    cl_args_label = tk.Label(window, text="command line args:",
+                             font=('David', 20, 'bold'), bg=windowbg, fg='black')
+    cl_args_input = tk.Text(window, height=2, width=20,
+                            bg='black', fg='white', font=('David', 20))
     # modify main window
-    window.geometry("350x520")
     window.config(bg=windowbg, width=8, height=3)
+    window.geometry("350x520")
     window.title('C++ project builder')
     window.resizable(False, False)
     # modify labels
-    title.config(font=('David', 35, 'bold'), bg=windowbg, fg='red')
     title.place(x=30, y=10)
-    cl_args_label.config(font=('David', 20, 'bold'), bg=windowbg, fg='black')
     cl_args_label.place(x=0, y=350)
     # modify buttons
-    debug_build_btn.config(bg=buttonbg, font=('David', 20), width=14, height=1)
     debug_build_btn.place(x=10, y=200)
-    release_build_btn.config(bg=buttonbg, font=('David', 20), width=14, height=1)
     release_build_btn.place(x=10, y=300)
-    debug_run_btn.config(bg=buttonbg, font=('David', 20), width=4, height=1)
     debug_run_btn.place(x=255, y=200)
-    release_run_btn.config(bg=buttonbg, font=('David', 20), width=4, height=1)
     release_run_btn.place(x=255, y=300)
     # modify cl_args_input
-    cl_args_input.config(bg='black', fg='white', font=('David', 20))
     cl_args_input.place(x=10, y=400)
     window.mainloop()
 
