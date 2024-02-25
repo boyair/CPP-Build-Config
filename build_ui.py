@@ -13,6 +13,7 @@ def __main__():
     global debug_run_btn
     global release_run_btn
     global cl_args_label
+    global cl_args_input
     windowbg = "#444444"  # dark grey
     buttonbg = "#bbbbbb"  # light grey
     # define window and widgets
@@ -71,7 +72,7 @@ def run_debug():
     release_run_btn.config(text='...')
     window.update()
     exec_file = "Application" if sys.platform == "linux" else "Application.exe"
-    os.system("bin/Debug/" + exec_file)
+    os.system("bin/Debug/" + exec_file + " " + cl_args_input.get())
     release_run_btn.config(text='RUN')
     window.update()
 
@@ -80,7 +81,7 @@ def run_release():
     release_run_btn.config(text='...')
     window.update()
     exec_file = "Application" if sys.platform == "linux" else "Application.exe"
-    os.system("bin/Release/" + exec_file)
+    os.system("bin/Release/" + exec_file + " " + cl_args_input.get())
     release_run_btn.config(text='RUN')
     window.update()
 
