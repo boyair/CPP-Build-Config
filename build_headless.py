@@ -36,12 +36,12 @@ def HandleChoice(choice):
         case 1:
             # Build Debug configuration on Linux using GNU Make
             print("building . . .")
-            os.system("premake5 gmake")
+            os.system("premake5 gmake2")
             os.system("make config=debug")
         case 2:
             # Build Release configuration on Linux using GNU Make
             print("building . . .")
-            os.system("premake5 gmake")
+            os.system("premake5 gmake2")
             os.system("make config=release")
         case 3:
             print("building process aborted by user.")

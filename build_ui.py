@@ -54,7 +54,7 @@ def __main__():
 def build_debug():
     debug_build_btn.config(text='building')
     window.update()
-    os.system("premake5 gmake")
+    os.system("premake5 gmake2")
     os.system("make config=debug")
     debug_build_btn.config(text="build debug🔨")
     window.update()
@@ -63,7 +63,7 @@ def build_debug():
 def build_release():
     release_build_btn.config(text='building')
     window.update()
-    os.system("premake5 gmake")
+    os.system("premake5 gmake2")
     os.system("make config=release")
     release_build_btn.config(text="build release📤")
     window.update()
