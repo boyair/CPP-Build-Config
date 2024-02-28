@@ -71,11 +71,11 @@ def build_release():
 
     # run executable functions
 def run_debug():
-    release_run_btn.config(text='...')
+    debug_run_btn.config(text='...')
     window.update()
     exec_file = "Application" if sys.platform == "linux" else "Application.exe"
     os.system("bin/Debug/" + exec_file + " " + cl_args_input.get("1.0","end-1c"))
-    release_run_btn.config(text='RUN')
+    debug_run_btn.config(text='RUN')
     window.update()
 
 
